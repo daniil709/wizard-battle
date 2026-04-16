@@ -5,7 +5,7 @@ from functions import load_image
 
 
 class Character(pg.sprite.Sprite):
-    def __init__(self, coords: tuple, folder):
+    def __init__(self, folder):
         super().__init__()
 
         self.idle_animation_left = []
@@ -22,7 +22,6 @@ class Character(pg.sprite.Sprite):
         self.current_animation = self.idle_animation_right
 
         self.rect = self.image.get_rect()
-        self.rect.center = coords
 
         self.timer = pg.time.get_ticks()
         self.interval = 300
@@ -72,13 +71,13 @@ class Character(pg.sprite.Sprite):
         if self.attack_mode:
             return
 
-        # if direction != 0:
-        #     self.animation_mode = True
-        #     self.rect.x += direction
-        #     self.current_animation = self.move_animation_left if direction == -1 else self.move_animation_right
-        # else:
-        #     self.animation_mode = True
-        #     self.current_animation = self.idle_animation_left if self.side == 'left' else self.idle_animation_right
+        if direction != 0:
+            self.animation_mode = True
+            self.rect.x += direction
+            self.current_animation = self.move_animation_left if direction == -1 else self.move_animation_right
+        else:
+            self.animation_mode = True
+            self.current_animation = self.idle_animation_left if self.side == 'left' else self.idle_animation_right
 
     def handle_animation(self):
         if self.animation_mode and not self.attack_mode:

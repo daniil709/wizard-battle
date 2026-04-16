@@ -3,12 +3,11 @@ from character import *
 
 class Player(Character):
     def __init__(self, coords: tuple, folder):
-        super().__init__(coords, folder)
+        super().__init__(folder)
 
         self.charge_indicator = pg.Surface((self.charge_power, 10))
         self.charge_indicator.fill('red')
         self.side = 'right'
-
         self.charge_mode = False
         self.attack_mode = False
 
@@ -32,17 +31,9 @@ class Player(Character):
             direction = 1
             self.side = "right"
 
-        self.handle_movement(direction, keys)
+        self.handle_movement(direction)
 
-    def handle_movement(self, direction, keys):
-        super().handle_movement(direction)
-
-        if direction != 0:
-            self.animation_mode = True
-            self.charge_mode = False
-            self.rect.x += direction
-            self.current_animation = self.move_animation_left if direction == -1 else self.move_animation_right
-        elif keys[pg.K_s]:
+        if keys[pg.K_s]:
             self.animation_mode = False
             self.charge_mode = False
             self.image = self.down[self.side != 'right']
@@ -50,10 +41,9 @@ class Player(Character):
             self.animation_mode = False
             self.image = self.charge[self.side != 'right']
             self.charge_mode = True
-        else:
-            self.animation_mode = True
-            self.charge_mode = False
-            self.current_animation = self.idle_animation_left if self.side == 'left' else self.idle_animation_right
+
+    # def handle_movement(self, direction):
+    #     super().handle_movement(direction)
 
     def handle_animation(self):
         super().handle_animation()

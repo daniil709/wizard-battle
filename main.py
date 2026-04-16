@@ -41,7 +41,7 @@ class Game:
         # Отрисовка интерфейса
         self.screen.blit(self.background, (0, 0))
         self.screen.blit(self.player.image, self.player.rect)
-        self.screen.blit(self.enemy.image, self.player.rect)
+        self.screen.blit(self.enemy.image, self.enemy.rect)
 
         if self.player.charge_mode:
             self.screen.blit(self.player.charge_indicator, (self.player.rect.left + 120, self.player.rect.top))

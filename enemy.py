@@ -3,29 +3,16 @@ from character import *
 
 class Enemy(Character):
     def __init__(self, coords: tuple, folder: str):
-        super().__init__(coords, folder)
+        super().__init__(folder)
 
         self.current_animation = self.idle_animation_left
-
-        self.rect = self.image.get_rect()
-        self.rect.center = coords
-
-        self.timer = pg.time.get_ticks()
-        self.interval = 300
         self.side = 'left'
         self.animation_mode = True
-
-        self.magic_balls = pg.sprite.Group()
-
-        self.attack_mode = False
-        self.attack_interval = 500
-
-        self.move_interval = 800
         self.move_duration = 0
         self.direction = 0
-        self.move_timer = pg.time.get_ticks()
-
         self.charge_power = 0
+        self.move_interval = 800
+        self.move_timer = pg.time.get_ticks()
 
     def load_animations(self):
         self.idle_animation_right = [load_image(f"images/{self.folder}/idle{i}.png", CHARACTER_WIDTH, CHARACTER_HEIGHT)
