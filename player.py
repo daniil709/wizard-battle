@@ -20,7 +20,7 @@ class Player(Character):
         self.down.append(pg.transform.flip(self.down[0], True, False))
 
     def update(self):
-        super().update() # Оставляем, он нужен для базовой логики
+        super().update()  # Оставляем, он нужен для базовой логики
         keys = pg.key.get_pressed()
         direction = 0
 
@@ -40,7 +40,7 @@ class Player(Character):
 
         # Обработка SPACE
         if keys[pg.K_SPACE]:
-            if not self.attack_mode: # Если не в режиме атаки
+            if not self.attack_mode:  # Если не в режиме атаки
                 self.animation_mode = False
                 self.image = self.charge[self.side != 'right']
                 self.charge_mode = True
@@ -48,7 +48,7 @@ class Player(Character):
             # Клавиша отпущена
             if self.charge_mode:
                 self.charge_mode = False
-                self.attack_mode = True # Активируем атаку
+                self.attack_mode = True  # Активируем атаку
 
     def handle_animation(self):
         # Сначала вызываем базовую анимацию

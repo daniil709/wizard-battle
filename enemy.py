@@ -27,13 +27,13 @@ class Enemy(Character):
         self.attack = [load_image(f"images/{self.folder}/attack.png", CHARACTER_WIDTH, CHARACTER_HEIGHT)]
         self.attack.append(pg.transform.flip(self.attack[0], True, False))
 
-    def update(self, player: Player=None, *args):
+    def update(self, player: Player = None, *args):
         super().update()
 
         if player is not None:
             self.handle_attack_mode(player)
 
-    def handle_attack_mode(self, player: Player=None):
+    def handle_attack_mode(self, player: Player = None):
         super().handle_attack_mode()
 
         if player is not None:
