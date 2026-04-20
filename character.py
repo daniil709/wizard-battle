@@ -5,7 +5,7 @@ from functions import load_image
 
 
 class Character(pg.sprite.Sprite):
-    def __init__(self, coords, folder):
+    def __init__(self, coords: tuple, folder: str):
         super().__init__()
 
         self.idle_animation_left = []
@@ -67,7 +67,7 @@ class Character(pg.sprite.Sprite):
                 self.attack_mode = False
                 self.timer = pg.time.get_ticks()
 
-    def handle_movement(self, direction):
+    def handle_movement(self, direction: int):
         if self.attack_mode:
             return
 

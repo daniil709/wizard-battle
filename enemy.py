@@ -1,8 +1,9 @@
 from character import *
+from player import Player
 
 
 class Enemy(Character):
-    def __init__(self, coords, folder: str):
+    def __init__(self, coords: tuple, folder: str):
         super().__init__(coords, folder)
 
         self.current_animation = self.idle_animation_left
@@ -26,13 +27,13 @@ class Enemy(Character):
         self.attack = [load_image(f"images/{self.folder}/attack.png", CHARACTER_WIDTH, CHARACTER_HEIGHT)]
         self.attack.append(pg.transform.flip(self.attack[0], True, False))
 
-    def update(self, player=None, *args):
+    def update(self, player: Player=None, *args):
         super().update()
 
         if player is not None:
             self.handle_attack_mode(player)
 
-    def handle_attack_mode(self, player=None):
+    def handle_attack_mode(self, player: Player=None):
         super().handle_attack_mode()
 
         if player is not None:

@@ -2,7 +2,7 @@ from character import *
 
 
 class Player(Character):
-    def __init__(self, coords, folder: str):
+    def __init__(self, coords: tuple, folder: str):
         super().__init__(coords, folder)
 
         self.current_animation = self.idle_animation_right
