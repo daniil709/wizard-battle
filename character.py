@@ -5,7 +5,7 @@ from functions import load_image
 
 
 class Character(pg.sprite.Sprite):
-    def __init__(self, folder):
+    def __init__(self, coords, folder):
         super().__init__()
 
         self.idle_animation_left = []
@@ -22,7 +22,7 @@ class Character(pg.sprite.Sprite):
         self.current_animation = self.idle_animation_right
 
         self.rect = self.image.get_rect()
-
+        self.rect.center = coords
         self.timer = pg.time.get_ticks()
         self.interval = 300
         self.animation_mode = True
@@ -87,9 +87,3 @@ class Character(pg.sprite.Sprite):
                     self.current_image = 0
                 self.image = self.current_animation[self.current_image]
                 self.timer = pg.time.get_ticks()
-
-        if self.attack_mode:
-            fireball_position = self.rect.topright if self.side == 'right' else self.rect.topleft
-            self.magic_balls.add(Fireball(fireball_position, self.side, self.charge_power))
-            self.image = self.attack[self.side != 'right']
-            self.timer = pg.time.get_ticks()

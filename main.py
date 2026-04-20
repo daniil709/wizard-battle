@@ -1,7 +1,6 @@
-import pygame as pg
 from enemy import *
-from fireball import Fireball
-from functions import load_image, text_render
+
+from functions import load_image
 from player import Player
 from constants import *
 
@@ -16,7 +15,6 @@ class Game:
         self.background = load_image("images/background.png", SCREEN_WIDTH, SCREEN_HEIGHT)
         self.player = Player((100, SCREEN_HEIGHT // 2), 'fire wizard')
         self.enemy = Enemy((SCREEN_WIDTH - 100, SCREEN_HEIGHT // 2), 'lightning wizard')
-
         self.clock = pg.time.Clock()
         self.run()
 
@@ -36,7 +34,7 @@ class Game:
         self.player.update()
         self.enemy.update(self.player)
         self.player.magic_balls.update()
-        
+
     def draw(self):
         # Отрисовка интерфейса
         self.screen.blit(self.background, (0, 0))
@@ -47,7 +45,6 @@ class Game:
             self.screen.blit(self.player.charge_indicator, (self.player.rect.left + 120, self.player.rect.top))
 
         self.player.magic_balls.draw(self.screen)
-        # print(self.player.fireballs.draw(self.screen))
 
         pg.display.flip()
 
