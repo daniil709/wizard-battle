@@ -19,7 +19,7 @@ class Character(pg.sprite.Sprite):
         self.load_animations()
         self.image = self.idle_animation_right[0]
         self.current_image = 0
-        self.current_animation = self.idle_animation_right
+        self.current_animation = None
 
         self.rect = self.image.get_rect()
         self.rect.center = coords

@@ -5,6 +5,7 @@ class Player(Character):
     def __init__(self, coords, folder: str):
         super().__init__(coords, folder)
 
+        self.current_animation = self.idle_animation_right
         self.charge_indicator = pg.Surface((self.charge_power, 10))
         self.charge_indicator.fill('red')
         self.side = 'right'
