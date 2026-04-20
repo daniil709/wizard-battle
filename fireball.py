@@ -4,10 +4,10 @@ from functions import load_image, text_render
 
 
 class Fireball(pg.sprite.Sprite):
-    def __init__(self, coord, side, power):
+    def __init__(self, coord, side, power, folder):
         super().__init__()
-
-        self.image = load_image('images/fire wizard/magicball.png', 200, 150)
+        self.folder = folder
+        self.image = load_image(f'images/{self.folder}/magicball.png', 200, 150)
         self.side = side
         self.power = power // 2
         self.rect = self.image.get_rect()

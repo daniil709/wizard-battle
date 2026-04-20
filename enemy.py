@@ -7,13 +7,10 @@ class Enemy(Character):
 
         self.current_animation = self.idle_animation_left
         self.side = 'left'
-        self.animation_mode = True
-        self.attack_mode = False
         self.move_interval = 800
         self.move_duration = 0
         self.direction = 0
         self.move_timer = pg.time.get_ticks()
-        self.charge_power = 0
 
     def load_animations(self):
         self.idle_animation_right = [load_image(f"images/{self.folder}/idle{i}.png", CHARACTER_WIDTH, CHARACTER_HEIGHT)
@@ -29,7 +26,7 @@ class Enemy(Character):
         self.attack = [load_image(f"images/{self.folder}/attack.png", CHARACTER_WIDTH, CHARACTER_HEIGHT)]
         self.attack.append(pg.transform.flip(self.attack[0], True, False))
 
-    def update(self, player=None, *args, **kwargs):
+    def update(self, player=None, *args):
         super().update()
 
         if player is not None:
