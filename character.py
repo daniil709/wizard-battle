@@ -1,11 +1,10 @@
 import pygame as pg
 from constants import *
-from fireball import Fireball
 from functions import load_image
 
 
 class Character(pg.sprite.Sprite):
-    def __init__(self, folder):
+    def __init__(self, coords, folder):
         super().__init__()
 
         self.idle_animation_left = []
@@ -19,10 +18,11 @@ class Character(pg.sprite.Sprite):
         self.load_animations()
         self.image = self.idle_animation_right[0]
         self.current_image = 0
-        self.current_animation = self.idle_animation_right
+        self.current_animation = None
+        self.health = 200
 
         self.rect = self.image.get_rect()
-
+        self.rect.center = coords
         self.timer = pg.time.get_ticks()
         self.interval = 300
         self.animation_mode = True
@@ -54,7 +54,7 @@ class Character(pg.sprite.Sprite):
             for image in self.move_animation_right
         ]
 
-        self.attack = [load_image('images/fire wizard/attack.png', CHARACTER_WIDTH, CHARACTER_HEIGHT)]
+        self.attack = [load_image(f'images/{self.folder}/attack.png', CHARACTER_WIDTH, CHARACTER_HEIGHT)]
         self.attack.append(pg.transform.flip(self.attack[0], True, False))
 
     def update(self):
@@ -79,6 +79,11 @@ class Character(pg.sprite.Sprite):
             self.animation_mode = True
             self.current_animation = self.idle_animation_left if self.side == 'left' else self.idle_animation_right
 
+        if self.rect.right >= SCREEN_WIDTH:
+            self.rect.right = SCREEN_WIDTH
+        elif self.rect.left <= 0:
+            self.rect.left = 0
+
     def handle_animation(self):
         if self.animation_mode and not self.attack_mode:
             if pg.time.get_ticks() - self.timer > self.interval:
@@ -87,9 +92,3 @@ class Character(pg.sprite.Sprite):
                     self.current_image = 0
                 self.image = self.current_animation[self.current_image]
                 self.timer = pg.time.get_ticks()
-
-        if self.attack_mode:
-            fireball_position = self.rect.topright if self.side == 'right' else self.rect.topleft
-            self.magic_balls.add(Fireball(fireball_position, self.side, self.charge_power))
-            self.image = self.attack[self.side != 'right']
-            self.timer = pg.time.get_ticks()

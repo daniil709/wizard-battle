@@ -5,3 +5,8 @@ CHARACTER_WIDTH = 300
 CHARACTER_HEIGHT = 375
 
 FPS = 60
+
+ENEMIES = ['lightning wizard', 'earth monk', 'fire wizard']
+
+LEFT_SIDE_COORDS = (100, SCREEN_HEIGHT // 2)
+RIGHT_SIDE_COORDS = (SCREEN_WIDTH - 100, SCREEN_HEIGHT // 2)
